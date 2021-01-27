@@ -36,6 +36,9 @@ public class Application {
             if((lineCount < 0) || (lineCount > Constants.MAX_LINES)) {
                 logger.severe("Incorrect number of lines. A file should contain from 1 until " + Constants.MAX_LINES + " lines.");
             } else {
+                if (lineCount != lines.size()){
+                    logger.info("The number of rows does not coincide with the actual number of rows in input files.");
+                }
                 logger.info(lineCount + " lines have been read.");
 
                 boolean isRecorded, isQueried;
@@ -45,7 +48,7 @@ public class Application {
                     if(line.startsWith(Constants.RECORD)) {
                         isRecorded = service.recordValues(line);
                         if(!isRecorded) {
-                            logger.info("Line " + lineCounter + " is not valid. Record was not added to the database.");
+                            logger.info("Record at line " + lineCounter + " is not valid. Record was not added to the database.");
                         }
                     } else if(line.startsWith(Constants.QUERY)) {
                         isQueried = service.getAvgWaitingTime(line, console::writeLine);

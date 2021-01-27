@@ -41,10 +41,9 @@ public class ListDatabase implements Database {
         }
         final Date finalDateTo = dateTo;
         List<Record> records = this.records.stream().filter(r -> (query.getServiceId().equals("*") || r.getServiceId().startsWith(query.getServiceId()))
-                && (query.getQuestionTypeId().equals("*") || r.getQuestionTypeId().startsWith(query.getQuestionTypeId()))
-                && r.getResponseType().equals(query.getResponseType())
-                && ((finalDateTo != null) ? r.getDate().after(dateFrom) && r.getDate().before(finalDateTo) : r.getDate().before(dateFrom)))
-                .collect(Collectors.toList());
+                && (query.getQuestionTypeId().equals("*") || r.getQuestionTypeId().startsWith(query.getQuestionTypeId())) &&
+                r.getResponseType().equals(query.getResponseType()) &&
+                (((finalDateTo != null) ? (r.getDate().after(dateFrom) && r.getDate().before(finalDateTo)) : r.getDate().after(dateFrom)))).collect(Collectors.toList());
 
         if(records.isEmpty()) {
             return -1;
