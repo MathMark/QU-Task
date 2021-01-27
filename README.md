@@ -36,7 +36,7 @@ It prints out “-” if the output is not defined.
 
 <b>Example</b>
 
-Input:
+Input:</br>
 7
 C 1.1 8.15.1 P 15.10.2012 83
 C 1 10.1 P 01.12.2012 65
@@ -46,12 +46,12 @@ C 3 10.2 N 02.10.2012 100
 D 1 * P 08.10.2012-20.11.2012
 D 3 10 P 01.12.2012
 
-Output:
-83
-100
--
+Output:</br>
+83</br>
+100</br>
+-</br>
 
-Explanation:
+Explanation:</br>
 1.query ( D 1.1 8 P 01.01.2012-01.12.2012 ) at line 5:</br>
 Valid only for 1.data line, because others have different question type.</br>
 1.data line has question type 8.15.1 which matches the query of question type 8.</br>
@@ -68,7 +68,5 @@ Result: (83+117)/2=100.</br>
 Doesn’t match any data line.</br>
 Result: “-”.</br>
 
-Solution
-Your solution must be optimized for readability, flexibility, and good maintenance of source
+<b>Solution:</b> Your solution must be optimized for readability, flexibility, and good maintenance of source
 code.
-You can choose Java, Scala, or PHP language, without external libraries.
