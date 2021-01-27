@@ -13,14 +13,4 @@ public class Query extends Input {
     public void setDateFromTo(String dateFromTo) {
         this.dateFromTo = dateFromTo;
     }
-
-    @Override
-    public String toString() {
-        return "Query{" +
-                "dateFromTo='" + dateFromTo + '\'' +
-                ", serviceId='" + serviceId + '\'' +
-                ", questionTypeId='" + questionTypeId + '\'' +
-                ", responseType='" + responseType + '\'' +
-                '}';
-    }
 }

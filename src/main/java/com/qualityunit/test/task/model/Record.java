@@ -25,15 +25,4 @@ public class Record extends Input {
     public void setTime(Integer time) {
         this.time = time;
     }
-
-    @Override
-    public String toString() {
-        return "Record{" +
-                "date=" + date +
-                ", time=" + time +
-                ", serviceId='" + serviceId + '\'' +
-                ", questionTypeId='" + questionTypeId + '\'' +
-                ", responseType='" + responseType + '\'' +
-                '}';
-    }
 }
