@@ -1,8 +1,8 @@
 package com.qualityunit.test.task.service;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public interface Service {
-    boolean recordValues(String inputLine);
-    boolean getAvgWaitingTime(String inputQuery, Consumer<String> consumer);
+    void analyze(List<String> input, Consumer<String> consumer);
 }

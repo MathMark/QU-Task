@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 public class Application {
     private static final Logger logger = Logger.getLogger(Application.class.getName());
-    private static final String INPUT_FILE_NAME = "input.txt";
+    private static final String INPUT_FILE_NAME = "input2.txt";
     private static final String OUTPUT_FILE_NAME = "output.txt";
 
     public static void main(String[] args) {
@@ -29,10 +29,11 @@ public class Application {
         Database database = new ListDatabase();
         Service service = new ServiceImpl(validator, recordMapper, queryMapper, database);
 
-        try(BufferedReader reader = new BufferedReader(new FileReader(INPUT_FILE_NAME));
-            Console console = new Console(OUTPUT_FILE_NAME)) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(INPUT_FILE_NAME)); Console console = new Console(OUTPUT_FILE_NAME)) {
+
             int lineCount = Integer.parseInt(reader.readLine());
             List<String> lines = reader.lines().limit(lineCount).collect(Collectors.toList());
+
             if((lineCount < 0) || (lineCount > Constants.MAX_LINES)) {
                 logger.severe("Incorrect number of lines. A file should contain from 1 until " + Constants.MAX_LINES + " lines.");
             } else {
@@ -40,24 +41,7 @@ public class Application {
                     logger.info("The number of rows does not coincide with the actual number of rows in input files.");
                 }
                 logger.info(lineCount + " lines have been read.");
-
-                boolean isRecorded, isQueried;
-                int lineCounter = 1;
-
-                for(String line : lines) {
-                    if(line.startsWith(Constants.RECORD)) {
-                        isRecorded = service.recordValues(line);
-                        if(!isRecorded) {
-                            logger.info("Record at line " + lineCounter + " is not valid. Record was not added to the database.");
-                        }
-                    } else if(line.startsWith(Constants.QUERY)) {
-                        isQueried = service.getAvgWaitingTime(line, console::writeLine);
-                        if(!isQueried) {
-                            logger.info("Unable to execute query at line " + lineCounter + " as it is not valid.");
-                        }
-                    }
-                    lineCounter++;
-                }
+                service.analyze(lines, console::writeLine);
             }
         } catch (IOException e) {
             e.printStackTrace();
